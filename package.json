@@ -16,6 +16,7 @@
     "core-js": "^2.6.0",
     "flag-icon-css": "^3.2.1",
     "font-awesome": "^4.7.0",
+    "multi-select-react": "^0.1.8",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",

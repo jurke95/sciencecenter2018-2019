@@ -10,13 +10,8 @@ class OnlineShop extends Component {
   };
 
 
-  componentDidMount() {
-
-    this.getWorks();
-  }
 
   render() {
-
 
 
 
@@ -24,7 +19,7 @@ class OnlineShop extends Component {
     return (
       <ul>
         {this.state.works.map(work => (
-          <li key={work.id}>{work.name}</li>
+          <li key={work.name}>{work.name}</li>
         ))}
       </ul>
     );
