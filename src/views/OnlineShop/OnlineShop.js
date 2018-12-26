@@ -10,8 +10,15 @@ class OnlineShop extends Component {
   };
 
 
+  componentDidMount() {
+    this.getWorks();
+  }
+
+
 
   render() {
+
+
 
 
 
@@ -28,7 +35,20 @@ class OnlineShop extends Component {
 
 
   getWorks() {
-    axios.get("http://localhost:8084/swork/getSWorks").then(res => {
+
+    var atoken = localStorage.getItem("jwt");
+
+    console.log(atoken);
+
+
+    axios.get("http://localhost:8084/swork/getSWorks", {
+
+      headers: {
+        "Authorization-Token": atoken
+      }
+    }
+
+    ).then(res => {
 
       console.log("usao u axios");
       console.log(res.data);
