@@ -5,8 +5,8 @@ import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGr
 class Login extends Component {
 
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
 
       email: "",
@@ -69,7 +69,7 @@ class Login extends Component {
 
         if (dat.jwt !== "null") {
           localStorage.setItem("jwt", dat.jwt);
-          this.props.history.push("/dashboard");
+          this.props.history.push("/");
 
         } else {
 

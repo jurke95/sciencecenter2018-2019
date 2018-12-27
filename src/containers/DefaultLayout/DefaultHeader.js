@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
+
 import {
   Badge,
   DropdownItem,
@@ -26,7 +28,66 @@ const propTypes = {
 
 const defaultProps = {};
 
+
+
 class DefaultHeader extends Component {
+
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+
+      atoken: ""
+
+
+
+
+    };
+    this.logoutFunction = this.logoutFunction.bind(this);
+
+
+  }
+
+
+
+
+
+  logoutFunction(event) {
+    this.setState({
+
+      atoken: localStorage.getItem("jwt")
+
+
+    });
+    localStorage.removeItem("jwt");
+
+    fetch('http://localhost:8084/user/logout', {
+      method: 'POST'
+
+
+    })
+      .then(res => {
+
+
+        switch (res.status) {
+
+          case 200: window.location = '/dashboard'; break;
+          case 401: console.error("Unauthorized"); break;
+          default: console.error("Unauthorized"); break;
+        }
+
+
+      }
+
+
+      )
+
+
+  }
+
+
+
   render() {
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
@@ -54,6 +115,10 @@ class DefaultHeader extends Component {
           </NavItem>
           <NavItem className="px-3">
             <Link to="/onlineshop">Online Shop</Link>
+          </NavItem>
+
+           <NavItem className="px-3">
+            <Link to="/profilepage">User profile</Link>
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
@@ -124,7 +189,7 @@ class DefaultHeader extends Component {
               <DropdownItem>
                 <i className="fa fa-shield" /> Lock Account
               </DropdownItem>
-              <DropdownItem onClick={e => this.props.onLogout(e)}>
+              <DropdownItem onClick={this.logoutFunction}>
                 <i className="fa fa-lock" /> Logout
               </DropdownItem>
             </DropdownMenu>

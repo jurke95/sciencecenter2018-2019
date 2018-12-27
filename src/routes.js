@@ -39,6 +39,7 @@ const Colors = React.lazy(() => import("./views/Theme/Colors"));
 const Typography = React.lazy(() => import("./views/Theme/Typography"));
 const Widgets = React.lazy(() => import("./views/Widgets/Widgets"));
 const OnlineShop = React.lazy(() => import("./views/OnlineShop/OnlineShop"));
+const ProfilePage = React.lazy(() => import("./views/ProfilePage/ProfilePage"));
 const Users = React.lazy(() => import("./views/Users/Users"));
 const User = React.lazy(() => import("./views/Users/User"));
 
@@ -110,6 +111,12 @@ const routes = [
     exact: true,
     name: "Onlineshop",
     component: OnlineShop
+  },
+  {
+    path: "/profilepage",
+    exact: true,
+    name: "Profilepage",
+    component: ProfilePage
   },
   { path: "/users/:id", exact: true, name: "User Details", component: User }
 ];
