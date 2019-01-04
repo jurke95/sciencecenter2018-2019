@@ -12,7 +12,13 @@ class ProfilePage extends Component {
         this.state = {
 
             email: "",
-            username: ""
+            username: "",
+            name: "",
+            surname: "",
+            title: "",
+            city: "",
+            country: "",
+            areas: []
 
 
 
@@ -28,7 +34,7 @@ class ProfilePage extends Component {
 
     componentDidMount() {
 
-        this.getWorks();
+        this.getUser();
     }
 
 
@@ -41,70 +47,58 @@ class ProfilePage extends Component {
 
 
         return (
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <div className="card">
 
-                            <div class="card-body">
-                                <div class="card-title mb-4">
-                                    <div class="d-flex justify-content-start">
+                            <div className="card-body">
+                                <div className="card-title mb-4">
+                                    <div className="d-flex justify-content-start">
+                                        {/*
                                         <div class="image-container">
-                                            <img src="http://placehold.it/150x150" id="imgProfile" style={{ width: '150px', height: '150px' }} class="img-thumbnail" />
-                                            <div class="middle">
-                                                <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
-                                                <input type="file" style={{ display: 'none' }} id="profilePicture" name="file" />
-                                            </div>
+
+                                             <img src="http://placehold.it/150x150" id="imgProfile" style={{ width: '150px', height: '150px' }} class="img-thumbnail" />
+                                                <div class="middle">
+                                                    <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                                                    <input type="file" style={{ display: 'none' }} id="profilePicture" name="file" />
+                                                </div>
                                         </div>
-                                        <div class="userData ml-3">
-                                            <h2 class="d-block" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}><a href="javascript:void(0);">Some Name</a></h2>
-                                            <h6 class="d-block"><a href="javascript:void(0)">1,500</a> Video Uploads</h6>
-                                            <h6 class="d-block"><a href="javascript:void(0)">300</a> Blog Posts</h6>
-                                        </div>
-                                        <div class="ml-auto">
+                                    */}
+                                        <div className="ml-auto">
                                             <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-12">
-                                        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <ul className="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                            <li className="nav-item">
+                                                <a className="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Connected Services</a>
-                                            </li>
+
                                         </ul>
-                                        <div class="tab-content ml-1" id="myTabContent">
-                                            <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+                                        <div className="tab-content ml-1" id="myTabContent">
+                                            <div className="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
 
 
-                                                <div class="row">
-                                                    <div class="col-sm-3 col-md-2 col-5">
+                                                <div className="row">
+                                                    <div className="col-sm-3 col-md-2 col-5">
                                                         <label style={{ fontWeight: 'bold' }}>Full Name</label>
                                                     </div>
                                                     <div class="col-md-8 col-6">
-                                                        Jamshaid Kamran
-                                                </div>
-                                                </div>
-                                                <hr />
-
-                                                <div class="row">
-                                                    <div class="col-sm-3 col-md-2 col-5">
-                                                        <label style={{ fontWeight: 'bold' }}>Birth Date</label>
+                                                        {this.state.name + " " + this.state.surname}
                                                     </div>
-                                                    <div class="col-md-8 col-6">
-                                                        March 22, 1994.
-                                                </div>
                                                 </div>
                                                 <hr />
 
 
+
+
                                                 <div class="row">
                                                     <div class="col-sm-3 col-md-2 col-5">
-                                                        <label style={{ fontWeight: 'bold' }}>Something</label>
+                                                        <label style={{ fontWeight: 'bold' }}>Username</label>
                                                     </div>
                                                     <div class="col-md-8 col-6">
                                                         {this.state.username}
@@ -113,20 +107,31 @@ class ProfilePage extends Component {
                                                 <hr />
                                                 <div class="row">
                                                     <div class="col-sm-3 col-md-2 col-5">
-                                                        <label style={{ fontWeight: 'bold' }} > Something</label>
+                                                        <label style={{ fontWeight: 'bold' }} > Email</label>
                                                     </div>
                                                     <div class="col-md-8 col-6">
                                                         {this.state.email}
                                                     </div>
                                                 </div>
                                                 <hr />
+
                                                 <div class="row">
                                                     <div class="col-sm-3 col-md-2 col-5">
-                                                        <label style={{ fontWeight: 'bold' }}>Something</label>
+                                                        <label style={{ fontWeight: 'bold' }} > Title</label>
                                                     </div>
                                                     <div class="col-md-8 col-6">
-                                                        Something
+                                                        {this.state.title}
+                                                    </div>
                                                 </div>
+                                                <hr />
+                                                <div class="row">
+                                                    <div class="col-sm-3 col-md-2 col-5">
+                                                        <label style={{ fontWeight: 'bold' }}>Areas</label>
+                                                    </div>
+                                                    <ul>
+                                                        {this.state.areas.map(area => (
+                                                            <li key={area}>{area}</li>))}
+                                                    </ul>
                                                 </div>
                                                 <hr />
 
@@ -151,7 +156,7 @@ class ProfilePage extends Component {
 
 
 
-    getWorks() {
+    getUser() {
 
         var atoken = localStorage.getItem("jwt");
 
@@ -172,6 +177,13 @@ class ProfilePage extends Component {
 
             this.setState({ username: res.data.username });
             this.setState({ email: res.data.email });
+            this.setState({ areas: res.data.areas });
+            this.setState({ name: res.data.name });
+            this.setState({ surname: res.data.surname });
+            this.setState({ title: res.data.title });
+            this.setState({ city: res.data.city });
+            this.setState({ country: res.data.country });
+
         });
     }
 
