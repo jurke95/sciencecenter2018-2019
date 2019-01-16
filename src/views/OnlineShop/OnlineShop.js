@@ -6,15 +6,32 @@ import logo from './swork.jpg';
 
 class OnlineShop extends Component {
 
-  state = {
-    works: []
-  };
 
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+
+      works: []
+
+
+
+
+    };
+    this.goToPayment = this.goToPayment.bind(this);
+
+
+  }
 
   componentDidMount() {
     this.getWorks();
   }
 
+  goToPayment() {
+
+    this.props.history.push("/payment");
+  }
 
 
   render() {
@@ -30,7 +47,8 @@ class OnlineShop extends Component {
 
       padding: "10px",
       overflow: "auto",
-      font: "bold 20px/1.5 Helvetica, Verdana, sans-serif"
+      font: "bold 20px/1.5 Helvetica, Verdana, sans-serif",
+      color: "yellow"
 
     }
 
@@ -42,11 +60,13 @@ class OnlineShop extends Component {
 
     }
 
+
+
     return (
       <ul style={ulstyle}>
         {this.state.works.map(work => (
 
-          <li style={listyle} key={work.name}>  <img style={imgstyle} src={logo} />{work.name}</li>
+          <li style={listyle} key={work.name}>  <img style={imgstyle} src={logo} alt="scientific work" />{work.name}<br></br><button onClick={this.goToPayment}>Buy</button></li>
         ))}
       </ul>
     );
@@ -72,7 +92,7 @@ class OnlineShop extends Component {
     console.log(atoken);
 
 
-    axios.get("http://localhost:8084/swork/getSWorks", {
+    axios.get("http://localhost:8083/swork/getSWorks", {
 
       headers: {
         "Authorization-Token": atoken

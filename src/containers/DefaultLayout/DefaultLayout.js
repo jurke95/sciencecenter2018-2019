@@ -1,27 +1,39 @@
 import React, { Component, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
+import Background from './bck.jpg';
 
 import {
-  AppAside,
   AppBreadcrumb,
-  AppFooter,
   AppHeader,
-  AppSidebar,
-  AppSidebarFooter,
-  AppSidebarForm,
-  AppSidebarHeader,
-  AppSidebarMinimizer,
-  AppSidebarNav,
+  // AppSidebar,
+  //AppSidebarFooter,
+  //AppSidebarForm,
+  // AppSidebarHeader,
+  // AppSidebarMinimizer,
+  //AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
-import navigation from '../../_nav';
+//import navigation from '../../_nav';
 // routes config
 import routes from '../../routes';
 
-const DefaultAside = React.lazy(() => import('./DefaultAside'));
-const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
+//const DefaultAside = React.lazy(() => import('./DefaultAside'));
+//const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
+
+var sectionStyle = {
+
+  backgroundImage: `url(${Background})`,
+  minHeight: '100vh',
+  minWidth: '100vh',
+  marginTop: 0,
+  zIndex: 1,
+  overflow: 'hidden',
+  backgroundRepeat: 'no-repeat'
+
+
+};
 
 class DefaultLayout extends Component {
 
@@ -34,24 +46,24 @@ class DefaultLayout extends Component {
 
   render() {
     return (
-      <div className="app">
+      <div className="app" style={sectionStyle}>
         <AppHeader fixed>
-          <Suspense  fallback={this.loading()}>
-            <DefaultHeader onLogout={e=>this.signOut(e)}/>
+          <Suspense fallback={this.loading()}>
+            <DefaultHeader onLogout={e => this.signOut(e)} />
           </Suspense>
         </AppHeader>
         <div className="app-body">
-          <AppSidebar fixed display="lg">
+          { /*<AppSidebar fixed display="lg">
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>
-            <AppSidebarNav navConfig={navigation} {...this.props} />
+              <AppSidebarNav navConfig={navigation} {...this.props} />
             </Suspense>
             <AppSidebarFooter />
             <AppSidebarMinimizer />
-          </AppSidebar>
+    </AppSidebar>  */}
           <main className="main">
-            <AppBreadcrumb appRoutes={routes}/>
+            <AppBreadcrumb appRoutes={routes} />
             <Container fluid>
               <Suspense fallback={this.loading()}>
                 <Switch>
@@ -72,17 +84,10 @@ class DefaultLayout extends Component {
               </Suspense>
             </Container>
           </main>
-          <AppAside fixed>
-            <Suspense fallback={this.loading()}>
-              <DefaultAside />
-            </Suspense>
-          </AppAside>
+
         </div>
-        <AppFooter>
-          <Suspense fallback={this.loading()}>
-            <DefaultFooter />
-          </Suspense>
-        </AppFooter>
+
+
       </div>
     );
   }

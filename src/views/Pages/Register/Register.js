@@ -116,7 +116,7 @@ class Register extends Component {
     this.renderData(data);
     var datas = JSON.stringify(data);
 
-    fetch('http://localhost:8084/user/registration?chosenareas=' + chosenareas, {
+    fetch('http://localhost:8083/user/registration?chosenareas=' + chosenareas, {
       method: 'POST',
       body: datas,
       headers: {

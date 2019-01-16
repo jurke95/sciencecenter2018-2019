@@ -18,7 +18,9 @@ class ProfilePage extends Component {
             title: "",
             city: "",
             country: "",
-            areas: []
+            areas: [],
+            idmag: 1
+
 
 
 
@@ -26,10 +28,12 @@ class ProfilePage extends Component {
 
         };
 
-
+        this.goToPayment = this.goToPayment.bind(this);
 
 
     }
+
+
 
 
     componentDidMount() {
@@ -39,10 +43,44 @@ class ProfilePage extends Component {
 
 
 
+    goToPayment() {
+
+
+
+        //this.props.history.push("/payment");
+        var atoken = localStorage.getItem("jwt");
+
+        console.log(this.state.idmag);
+
+
+        axios.get("http://localhost:8083/paymentobj/create/" + this.state.idmag, {
+
+            headers: {
+                "Authorization-Token": atoken
+            }
+        }
+
+        ).then(res => {
+
+            console.log(res.data);
+            window.location.href = "http://localhost:3000/id=" + res.data;
+        });
+
+
+    }
+
+
     render() {
 
 
+        const buttonstyle = {
 
+            float: "left",
+            margin: "0 0 0 300px",
+            paddingBottom: "4px",
+
+
+        }
 
 
 
@@ -56,7 +94,7 @@ class ProfilePage extends Component {
                                 <div className="card-title mb-4">
                                     <div className="d-flex justify-content-start">
                                         {/*
-                                        <div class="image-container">
+                                        <div className="image-container">
 
                                              <img src="http://placehold.it/150x150" id="imgProfile" style={{ width: '150px', height: '150px' }} class="img-thumbnail" />
                                                 <div class="middle">
@@ -66,7 +104,7 @@ class ProfilePage extends Component {
                                         </div>
                                     */}
                                         <div className="ml-auto">
-                                            <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                                            <input type="button" className="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +125,7 @@ class ProfilePage extends Component {
                                                     <div className="col-sm-3 col-md-2 col-5">
                                                         <label style={{ fontWeight: 'bold' }}>Full Name</label>
                                                     </div>
-                                                    <div class="col-md-8 col-6">
+                                                    <div className="col-md-8 col-6">
                                                         {this.state.name + " " + this.state.surname}
                                                     </div>
                                                 </div>
@@ -96,36 +134,36 @@ class ProfilePage extends Component {
 
 
 
-                                                <div class="row">
-                                                    <div class="col-sm-3 col-md-2 col-5">
+                                                <div className="row">
+                                                    <div className="col-sm-3 col-md-2 col-5">
                                                         <label style={{ fontWeight: 'bold' }}>Username</label>
                                                     </div>
-                                                    <div class="col-md-8 col-6">
+                                                    <div className="col-md-8 col-6">
                                                         {this.state.username}
                                                     </div>
                                                 </div>
                                                 <hr />
-                                                <div class="row">
-                                                    <div class="col-sm-3 col-md-2 col-5">
+                                                <div className="row">
+                                                    <div className="col-sm-3 col-md-2 col-5">
                                                         <label style={{ fontWeight: 'bold' }} > Email</label>
                                                     </div>
-                                                    <div class="col-md-8 col-6">
+                                                    <div className="col-md-8 col-6">
                                                         {this.state.email}
                                                     </div>
                                                 </div>
                                                 <hr />
 
-                                                <div class="row">
-                                                    <div class="col-sm-3 col-md-2 col-5">
+                                                <div className="row">
+                                                    <div className="col-sm-3 col-md-2 col-5">
                                                         <label style={{ fontWeight: 'bold' }} > Title</label>
                                                     </div>
-                                                    <div class="col-md-8 col-6">
+                                                    <div className="col-md-8 col-6">
                                                         {this.state.title}
                                                     </div>
                                                 </div>
                                                 <hr />
-                                                <div class="row">
-                                                    <div class="col-sm-3 col-md-2 col-5">
+                                                <div className="row">
+                                                    <div className="col-sm-3 col-md-2 col-5">
                                                         <label style={{ fontWeight: 'bold' }}>Areas</label>
                                                     </div>
                                                     <ul>
@@ -135,10 +173,22 @@ class ProfilePage extends Component {
                                                 </div>
                                                 <hr />
 
+
+
+                                                <div className="row">
+                                                    <div className="col-sm-3 col-md-2 col-5">
+                                                        <label style={{ fontWeight: 'bold' }} > Membership</label>
+                                                    </div>
+                                                    <div className="col-md-8 col-6">
+                                                        {"Not active"}
+                                                    </div>
+                                                    <div>
+                                                        <button style={buttonstyle} onClick={this.goToPayment}>Click to pay membership</button>
+                                                    </div>
+                                                </div>
+                                                <hr />
                                             </div>
-                                            <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
-                                                Facebook, Google, Twitter Account that are connected to this account
-                                        </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +213,7 @@ class ProfilePage extends Component {
         console.log(atoken);
 
 
-        axios.get("http://localhost:8084/user/getLoggedUser/" + atoken, {
+        axios.get("http://localhost:8083/user/getLoggedUser/" + atoken, {
 
             headers: {
                 "Authorization-Token": atoken

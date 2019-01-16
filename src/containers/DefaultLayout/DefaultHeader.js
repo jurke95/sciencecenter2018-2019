@@ -14,7 +14,7 @@ import {
 import PropTypes from "prop-types";
 
 import {
-  AppAsideToggler,
+  //AppAsideToggler,
   AppHeaderDropdown,
   AppNavbarBrand,
   AppSidebarToggler
@@ -117,7 +117,7 @@ class DefaultHeader extends Component {
             <Link to="/onlineshop">Online Shop</Link>
           </NavItem>
 
-           <NavItem className="px-3">
+          <NavItem className="px-3">
             <Link to="/profilepage">User profile</Link>
           </NavItem>
         </Nav>
@@ -195,7 +195,7 @@ class DefaultHeader extends Component {
             </DropdownMenu>
           </AppHeaderDropdown>
         </Nav>
-        <AppAsideToggler className="d-md-down-none" />
+        { /*<AppAsideToggler className="d-md-down-none" /> */}
         {/*<AppAsideToggler className="d-lg-none" mobile />*/}
       </React.Fragment>
     );
