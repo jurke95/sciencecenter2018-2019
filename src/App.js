@@ -26,6 +26,11 @@ const Page500 = Loadable({
 });
 
 
+const PaymentSuccess = Loadable({
+  loader: () => import('./views/Pages/PaymentSuccess/PaymentSuccess'),
+  loading
+});
+
 
 class App extends Component {
 
@@ -33,7 +38,7 @@ class App extends Component {
     return (
       <HashRouter>
         <Switch>
-
+          <Route path="/success/:paymentId?/:token?/:PayerID?" name="PaymentSuccess" component={PaymentSuccess} />
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
           <Route path="/" name="Home" component={DefaultLayout} />
