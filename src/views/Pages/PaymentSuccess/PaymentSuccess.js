@@ -58,7 +58,11 @@ class PaymentSuccess extends Component {
             .then(res => {
 
 
-                console.log(res);
+
+                alert("Your payment is successfully completed!");
+
+                this.props.history.push("/");
+
 
             }
             )

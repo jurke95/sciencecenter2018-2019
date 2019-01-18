@@ -43,6 +43,7 @@ const OnlineShop = React.lazy(() => import("./views/OnlineShop/OnlineShop"));
 const ProfilePage = React.lazy(() => import("./views/ProfilePage/ProfilePage"));
 const Register = React.lazy(() => import("./views/Pages/Register/Register"));
 const Login = React.lazy(() => import("./views/Pages/Login/Login"));
+const PaymentSuccess = React.lazy(() => import("./views/Pages/PaymentSuccess/PaymentSuccess"));
 const Payment = React.lazy(() => import("./views/Payment/Payment"));
 const Users = React.lazy(() => import("./views/Users/Users"));
 const User = React.lazy(() => import("./views/Users/User"));
@@ -140,6 +141,11 @@ const routes = [
     exact: true,
     name: "Login",
     component: Login
+  },
+  {
+    path: "/success/:paymentId?/:token?/:PayerID?",
+    name: "Paymentsuccess",
+    component: PaymentSuccess
   },
 
   { path: "/users/:id", exact: true, name: "User Details", component: User }
