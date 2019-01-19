@@ -45,8 +45,8 @@ const Register = React.lazy(() => import("./views/Pages/Register/Register"));
 const Login = React.lazy(() => import("./views/Pages/Login/Login"));
 const PaymentSuccess = React.lazy(() => import("./views/Pages/PaymentSuccess/PaymentSuccess"));
 const Payment = React.lazy(() => import("./views/Payment/Payment"));
-const Users = React.lazy(() => import("./views/Users/Users"));
-const User = React.lazy(() => import("./views/Users/User"));
+const Magazines = React.lazy(() => import("./views/Magazines/Magazines"));
+//const User = React.lazy(() => import("./views/Users/User"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -110,7 +110,7 @@ const routes = [
   { path: "/notifications/modals", name: "Modals", component: Modals },
   { path: "/widgets", name: "Widgets", component: Widgets },
   { path: "/charts", name: "Charts", component: Charts },
-  { path: "/users", exact: true, name: "Users", component: Users },
+  { path: "/magazines", exact: true, name: "Magazines", component: Magazines },
   {
     path: "/onlineshop",
     exact: true,
@@ -148,7 +148,7 @@ const routes = [
     component: PaymentSuccess
   },
 
-  { path: "/users/:id", exact: true, name: "User Details", component: User }
+  // { path: "/users/:id", exact: true, name: "User Details", component: User }
 ];
 
 export default routes;

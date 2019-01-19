@@ -111,7 +111,7 @@ class DefaultHeader extends Component {
             <NavLink href="/">Dashboard</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <Link to="/users">Users</Link>
+            <Link to="/magazines">Magazines</Link>
           </NavItem>
           <NavItem className="px-3">
             <Link to="/onlineshop">Online Shop</Link>
