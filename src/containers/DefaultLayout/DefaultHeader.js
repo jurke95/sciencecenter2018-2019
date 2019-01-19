@@ -62,7 +62,7 @@ class DefaultHeader extends Component {
     });
     localStorage.removeItem("jwt");
 
-    fetch('http://localhost:8084/user/logout', {
+    fetch('http://localhost:8083/user/logout', {
       method: 'POST'
 
 
@@ -143,7 +143,7 @@ class DefaultHeader extends Component {
           <AppHeaderDropdown direction="down">
             <DropdownToggle nav>
               <img
-                src={"../../assets/img/avatars/6.jpg"}
+                src={"../../assets/img/avatars/userpic.jpg"}
                 className="img-avatar"
                 alt="admin@bootstrapmaster.com"
               />
