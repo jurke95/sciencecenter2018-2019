@@ -5,6 +5,7 @@ import axios from "axios";
 
 
 
+
 class Magazines extends Component {
 
 
@@ -81,7 +82,7 @@ class Magazines extends Component {
 
 
                       <tr>
-                        <td> {magazine.id}</td>
+                        <td> <img src={require('./mLogos/' + magazine.imgpath)} alt={"img" + magazine.imgpath} />  </td>
                         <td> {magazine.name}</td>
                         <td>{magazine.issn}</td>
                       </tr>

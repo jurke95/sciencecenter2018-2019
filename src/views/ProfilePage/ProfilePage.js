@@ -53,7 +53,7 @@ class ProfilePage extends Component {
         console.log(this.state.idmag);
 
 
-        axios.get("http://localhost:8083/paymentobj/create/" + this.state.idmag, {
+        axios.get("http://localhost:8083/paymentobj/create", {
 
             headers: {
                 "Authorization-Token": atoken
@@ -63,7 +63,7 @@ class ProfilePage extends Component {
         ).then(res => {
 
             console.log(res.data);
-            window.location.href = "http://localhost:3000/id=" + res.data;
+            window.location.href = res.data;
         });
 
 
