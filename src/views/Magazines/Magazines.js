@@ -20,7 +20,7 @@ class Magazines extends Component {
 
 
     };
-
+    this.goToMagazineDetail = this.goToMagazineDetail.bind(this);
 
 
   }
@@ -28,6 +28,14 @@ class Magazines extends Component {
   componentDidMount() {
     this.getMagazines();
   }
+
+
+  goToMagazineDetail(data) {
+
+
+    this.props.history.push("/magazines/journals/id=" + data);
+  }
+
 
 
   getMagazines() {
@@ -56,7 +64,14 @@ class Magazines extends Component {
 
   render() {
 
+    const TableRow = ({ magazine }) => (
+      <tr className="table-light" onClick={() => { this.goToMagazineDetail(magazine.id) }}>
 
+        <td> <img src={require('./mLogos/' + magazine.imgpath)} alt={"img" + magazine.imgpath} />  </td>
+        <td> {magazine.name}</td>
+        <td>{magazine.issn}</td>
+      </tr>
+    )
 
     return (
       <div className="animated fadeIn">
@@ -81,11 +96,7 @@ class Magazines extends Component {
                     {this.state.magazines.map(magazine => (
 
 
-                      <tr>
-                        <td> <img src={require('./mLogos/' + magazine.imgpath)} alt={"img" + magazine.imgpath} />  </td>
-                        <td> {magazine.name}</td>
-                        <td>{magazine.issn}</td>
-                      </tr>
+                      <TableRow key={magazine.id} magazine={magazine} />
 
 
 

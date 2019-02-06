@@ -14,7 +14,7 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      opt: '',
+      opt: 'A',
       multiSelect: [],
       choosedAreas: [],
       stringAreas: [],
@@ -206,6 +206,11 @@ class Register extends Component {
                       <Label check className="form-check-label" htmlFor="radio3">Recensent</Label>
                     </FormGroup>
 
+                    <FormGroup check className="radio">
+                      <Input className="form-check-input" type="radio" checked={this.state.opt === "RR"} onChange={this.handleChange} id="radio4" name="radios" value="RR" />
+                      <Label check className="form-check-label" htmlFor="radio4">Reader</Label>
+                    </FormGroup>
+
                     <FormGroup row>
                       <Col md="3">
                         <Label htmlFor="text-input">Name</Label>
@@ -248,7 +253,7 @@ class Register extends Component {
                     </FormGroup>
 
 
-                    {this.state.opt !== "A" && <div>
+                    {this.state.opt !== "A" && this.state.opt !== "RR" && <div>
 
 
                       <FormGroup row>

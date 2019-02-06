@@ -46,6 +46,9 @@ const Login = React.lazy(() => import("./views/Pages/Login/Login"));
 const PaymentSuccess = React.lazy(() => import("./views/Pages/PaymentSuccess/PaymentSuccess"));
 const Payment = React.lazy(() => import("./views/Payment/Payment"));
 const Magazines = React.lazy(() => import("./views/Magazines/Magazines"));
+const MagazineEditions = React.lazy(() => import("./views/Magazines/MagazineEditions"));
+const MagazineArticles = React.lazy(() => import("./views/Magazines/MagazineArticles"));
+
 //const User = React.lazy(() => import("./views/Users/User"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -111,6 +114,10 @@ const routes = [
   { path: "/widgets", name: "Widgets", component: Widgets },
   { path: "/charts", name: "Charts", component: Charts },
   { path: "/magazines", exact: true, name: "Magazines", component: Magazines },
+  { path: "/magazines/journals/:id", name: "MagazineEditions", component: MagazineEditions },
+  { path: "/magazines/articles/:id/:edition", name: "MagazineArticles", component: MagazineArticles },
+
+
   {
     path: "/onlineshop",
     exact: true,
