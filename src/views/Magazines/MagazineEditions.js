@@ -30,6 +30,7 @@ class MagazineEditions extends Component {
         const id = window.location.href.split('=')[1];
         this.setState({ idm: id });
         this.getEditions(id);
+        /*
         const naziv = "5.Nalaz leventskog sivog dugousana ja podrucju poseda manastira Hilandara.pdf";
         var atoken = localStorage.getItem("jwt");
 
@@ -50,6 +51,7 @@ class MagazineEditions extends Component {
             const fileURL = URL.createObjectURL(file);
             window.open(fileURL);
         });
+        */
     }
 
 

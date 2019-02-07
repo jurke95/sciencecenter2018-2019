@@ -16,6 +16,7 @@ class ProfilePage extends Component {
             name: "",
             surname: "",
             title: "",
+            role: "",
             city: "",
             country: "",
             areas: [],
@@ -164,6 +165,16 @@ class ProfilePage extends Component {
                                                 <hr />
                                                 <div className="row">
                                                     <div className="col-sm-3 col-md-2 col-5">
+                                                        <label style={{ fontWeight: 'bold' }} > Role</label>
+                                                    </div>
+                                                    <div className="col-md-8 col-6">
+                                                        {this.state.role}
+                                                    </div>
+                                                </div>
+                                                <hr />
+
+                                                <div className="row">
+                                                    <div className="col-sm-3 col-md-2 col-5">
                                                         <label style={{ fontWeight: 'bold' }}>Areas</label>
                                                     </div>
                                                     <ul>
@@ -233,6 +244,8 @@ class ProfilePage extends Component {
             this.setState({ title: res.data.title });
             this.setState({ city: res.data.city });
             this.setState({ country: res.data.country });
+            this.setState({ role: res.data.role });
+
 
         });
     }

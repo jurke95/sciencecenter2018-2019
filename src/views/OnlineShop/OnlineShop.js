@@ -25,7 +25,7 @@ class OnlineShop extends Component {
   }
 
   componentDidMount() {
-    this.getWorks();
+    //this.getWorks();
   }
 
   goToPayment() {
