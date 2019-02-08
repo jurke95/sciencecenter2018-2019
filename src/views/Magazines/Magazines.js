@@ -23,6 +23,7 @@ class Magazines extends Component {
     };
     this.goToMagazineDetail = this.goToMagazineDetail.bind(this);
     this.goToPayment = this.goToPayment.bind(this);
+    this.checkMembership = this.checkMembership.bind(this);
 
 
   }
@@ -94,6 +95,39 @@ class Magazines extends Component {
     });
   }
 
+  checkMembership(id) {
+
+
+
+
+    var atoken = localStorage.getItem("jwt");
+
+
+
+
+    axios.get("http://localhost:8083/user/checkMembershipStatus/" + id, {
+
+      headers: {
+        "Authorization-Token": atoken
+      }
+    }
+
+    ).then(res => {
+
+      if (res.data.status === "active") {
+        alert("You already have active membership!");
+      } else {
+        this.goToPayment(id);
+      }
+
+    });
+  }
+
+
+
+
+
+
   goToPayment(id) {
 
     console.log(id + "ovo je broj magazineaa");
@@ -132,14 +166,20 @@ class Magazines extends Component {
         <td> <img src={require('./mLogos/' + magazine.imgpath)} alt={"img" + magazine.imgpath} onClick={() => { this.goToMagazineDetail(magazine.id) }} />  </td>
         <td> {magazine.name}</td>
         <td>{magazine.issn}</td>
-        {this.state.role === "USER" &&
-          <td><button onClick={() => { this.goToPayment(magazine.id) }}>Buy membership!</button> Just {magazine.membershipfee} euros for 30 days! </td>
+        {this.state.role === "USER" && magazine.openaccess === false &&
+          < td > <button onClick={() => { this.checkMembership(magazine.id) }}>Buy membership!</button> Just {magazine.membershipfee} euros for 30 days! </td>
         }
 
-        {this.state.role === "AUTHOR" &&
+        {
+          this.state.role === "AUTHOR" &&
           <td> <button>Publish scientific work!</button> </td>
         }
-      </tr>
+
+        {this.state.role === "USER" && magazine.openaccess === true &&
+          < td >This is open access magazine! </td>
+        }
+
+      </tr >
 
     )
 

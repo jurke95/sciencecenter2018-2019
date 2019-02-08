@@ -19,8 +19,10 @@ class ProfilePage extends Component {
             role: "",
             city: "",
             country: "",
+            id: 0,
             areas: [],
-            idmag: 1
+            idmag: 1,
+            memberships: []
 
 
 
@@ -74,14 +76,7 @@ class ProfilePage extends Component {
     render() {
 
 
-        const buttonstyle = {
 
-            float: "left",
-            margin: "0 0 0 300px",
-            paddingBottom: "4px",
-
-
-        }
 
 
 
@@ -188,14 +183,13 @@ class ProfilePage extends Component {
 
                                                 <div className="row">
                                                     <div className="col-sm-3 col-md-2 col-5">
-                                                        <label style={{ fontWeight: 'bold' }} > Membership</label>
+                                                        <label style={{ fontWeight: 'bold' }} > Active Memberships</label>
                                                     </div>
-                                                    <div className="col-md-8 col-6">
-                                                        {"Not active"}
-                                                    </div>
-                                                    <div>
-                                                        <button style={buttonstyle} onClick={this.goToPayment}>Click to pay membership</button>
-                                                    </div>
+                                                    <ul>
+                                                        {this.state.memberships.map(m => (
+                                                            <li key={m.id}>{m.active === "active" && "Magazine " + m.magazine.name + ",  Valid to: " + m.endDate + " (YYYY-MM-DD)"}</li>))}
+                                                    </ul>
+
                                                 </div>
                                                 <hr />
                                             </div>
@@ -245,12 +239,28 @@ class ProfilePage extends Component {
             this.setState({ city: res.data.city });
             this.setState({ country: res.data.country });
             this.setState({ role: res.data.role });
+            this.setState({ id: res.data.id });
+
+            axios.get("http://localhost:8083/user/getMemberships/" + this.state.id, {
+
+                headers: {
+                    "Authorization-Token": atoken
+                }
+            }
+
+            ).then(resp => {
+
+                this.setState({ memberships: resp.data });
+
+            }
+
+            )
 
 
-        });
+        }
+        )
+
     }
-
-
 
 
 
