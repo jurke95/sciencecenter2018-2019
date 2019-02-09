@@ -24,6 +24,7 @@ class Magazines extends Component {
     this.goToMagazineDetail = this.goToMagazineDetail.bind(this);
     this.goToPayment = this.goToPayment.bind(this);
     this.checkMembership = this.checkMembership.bind(this);
+    this.publish = this.publish.bind(this);
 
 
   }
@@ -124,6 +125,42 @@ class Magazines extends Component {
   }
 
 
+  publish(id, type) {
+
+    var atoken = localStorage.getItem("jwt");
+    console.log()
+
+
+    if (type === true) {
+
+      axios.get("http://localhost:8083/user/checkMembershipStatus/" + id, {
+
+        headers: {
+          "Authorization-Token": atoken
+        }
+      }
+
+      ).then(res => {
+
+        if (res.data.status === "active") {
+          alert("Successfully published!");
+        } else {
+          alert("This is open-access magazine. In order to publish, you must have valid membership!");
+        }
+
+      });
+
+    } else {
+      alert("Successfully published!");
+
+    }
+
+
+
+
+  }
+
+
 
 
 
@@ -134,26 +171,40 @@ class Magazines extends Component {
 
     //this.props.history.push("/payment");
     var atoken = localStorage.getItem("jwt");
+    let data = {
+
+      magazineid: id,
+      editionid: "0",
+      articleid: "0"
+
+    };
+
+    var datas = JSON.stringify(data);
+    console.log(data);
+    //console.log(datas);
 
 
-
-
-    axios.get("http://localhost:8083/paymentobj/create/" + id, {
-
+    fetch('http://localhost:8083/paymentobj/create', {
+      method: 'POST',
+      body: datas,
       headers: {
+        'Content-Type': 'application/json',
         "Authorization-Token": atoken
+
       }
-    }
-
-    ).then(res => {
-
-      console.log(res.data);
-      window.location.href = res.data;
-    });
+    })
+      .then(res => res.json()).then(dat => {
 
 
+
+        window.location.href = dat.coderesponse;
+
+
+
+
+
+      });
   }
-
 
   render() {
 
@@ -172,8 +223,20 @@ class Magazines extends Component {
 
         {
           this.state.role === "AUTHOR" &&
-          <td> <button>Publish scientific work!</button> </td>
+
+          <td> <button onClick={() => { this.publish(magazine.id, magazine.openaccess) }}>Publish scientific work!</button> </td>
         }
+
+
+
+
+        {
+          this.state.role === "AUTHOR" && magazine.openaccess === true &&
+          <td> <button onClick={() => { this.checkMembership(magazine.id) }}>Buy Membership!</button> </td>
+
+        }
+
+
 
         {this.state.role === "USER" && magazine.openaccess === true &&
           < td >This is open access magazine! </td>

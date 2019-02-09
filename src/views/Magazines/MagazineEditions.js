@@ -91,6 +91,130 @@ class MagazineEditions extends Component {
     }
 
 
+    checkMembership(id, st, eid, ename, pdfname) {
+
+
+
+
+        var atoken = localStorage.getItem("jwt");
+
+        if (st === false) {
+
+
+            axios.get("http://localhost:8083/user/checkMembershipStatus/" + id, {
+
+                headers: {
+                    "Authorization-Token": atoken
+                }
+            }
+
+            ).then(res => {
+
+                if (res.data.status === "active") {
+                    this.downloadPdf(pdfname);
+                } else {
+
+
+
+                    axios.get("http://localhost:8083/user/checkObjectPayment/" + ename, {
+
+                        headers: {
+                            "Authorization-Token": atoken
+                        },
+
+                    }
+                    ).then(r => {
+                        if (r.data.payed === "yes") {
+                            this.downloadPdf(pdfname);
+                        }
+                        else {
+
+                            this.goToPayment(id, eid);
+                        }
+
+
+                    });
+
+                }
+            })
+
+
+
+        } else {
+            this.downloadPdf(pdfname);
+        }
+    }
+
+    downloadPdf(name) {
+        var atoken = localStorage.getItem("jwt");
+
+
+        axios.get("http://localhost:8083/download/file/" + name, {
+
+            headers: {
+                "Authorization-Token": atoken
+            },
+            responseType: 'blob'
+        }
+        ).then(res => {
+
+            const file = new Blob(
+                [res.data],
+                { type: 'application/pdf' });
+
+            const fileURL = URL.createObjectURL(file);
+            window.open(fileURL);
+        });
+
+
+
+    }
+
+    goToPayment(idm, eid) {
+
+
+
+        //this.props.history.push("/payment");
+        var atoken = localStorage.getItem("jwt");
+        let data = {
+
+            magazineid: idm,
+            editionid: eid,
+            articleid: "0"
+
+        };
+
+        var datas = JSON.stringify(data);
+        console.log(data);
+        //console.log(datas);
+
+
+        fetch('http://localhost:8083/paymentobj/create', {
+            method: 'POST',
+            body: datas,
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization-Token": atoken
+
+            }
+        })
+            .then(res => res.json()).then(dat => {
+
+
+
+                window.location.href = dat.coderesponse;
+
+
+
+
+
+            });
+    }
+
+
+
+
+
 
     render() {
 
@@ -118,7 +242,7 @@ class MagazineEditions extends Component {
             <ul style={ulstyle}>
                 {this.state.editions.map(edition => (
 
-                    <li style={listyle} key={edition.name} onClick={() => { this.goToArticles(edition.number) }}> {edition.name}</li>
+                    <li style={listyle} key={edition.name} onClick={() => { this.goToArticles(edition.number) }}> {edition.name} {"  "}<button onClick={() => { this.checkMembership(edition.magazine.id, edition.magazine.openaccess, edition.id, edition.name, edition.pdf) }}>Read this number!</button></li>
                 ))}
             </ul>
         );

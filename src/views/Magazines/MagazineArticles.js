@@ -80,6 +80,129 @@ class MagazineArticles extends Component {
     }
 
 
+    checkMembership(magid, st, aid, aname) {
+
+
+
+
+        var atoken = localStorage.getItem("jwt");
+
+        if (st === false) {
+
+
+            axios.get("http://localhost:8083/user/checkMembershipStatus/" + magid, {
+
+                headers: {
+                    "Authorization-Token": atoken
+                }
+            }
+
+            ).then(res => {
+
+                if (res.data.status === "active") {
+                    this.downloadPdf(aname + ".pdf");
+                } else {
+
+
+
+                    axios.get("http://localhost:8083/user/checkObjectPayment/" + aname, {
+
+                        headers: {
+                            "Authorization-Token": atoken
+                        },
+
+                    }
+                    ).then(r => {
+                        if (r.data.payed === "yes") {
+                            this.downloadPdf(aname + ".pdf");
+                        }
+                        else {
+
+                            this.goToPayment(magid, aid);
+                        }
+
+
+                    });
+
+                }
+
+            });
+
+        } else {
+            this.downloadPdf(aname + ".pdf");
+        }
+    }
+
+    goToPayment(idm, aid) {
+
+
+
+        //this.props.history.push("/payment");
+        var atoken = localStorage.getItem("jwt");
+        let data = {
+
+            magazineid: idm,
+            editionid: "0",
+            articleid: aid
+
+        };
+
+        var datas = JSON.stringify(data);
+        console.log(data);
+        //console.log(datas);
+
+
+        fetch('http://localhost:8083/paymentobj/create', {
+            method: 'POST',
+            body: datas,
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization-Token": atoken
+
+            }
+        })
+            .then(res => res.json()).then(dat => {
+
+
+
+                window.location.href = dat.coderesponse;
+
+
+
+
+
+            });
+    }
+
+
+    downloadPdf(name) {
+        var atoken = localStorage.getItem("jwt");
+
+
+        axios.get("http://localhost:8083/download/file/" + name, {
+
+            headers: {
+                "Authorization-Token": atoken
+            },
+            responseType: 'blob'
+        }
+        ).then(res => {
+
+            const file = new Blob(
+                [res.data],
+                { type: 'application/pdf' });
+
+            const fileURL = URL.createObjectURL(file);
+            window.open(fileURL);
+        });
+
+
+
+    }
+
+
+
+
 
     render() {
 
@@ -87,7 +210,8 @@ class MagazineArticles extends Component {
             <tr className="table-light">
 
 
-                <td> {article.name}</td>
+                <td> {article.name}  {"  "}<br></br><button onClick={() => { this.checkMembership(article.magazine.id, article.magazine.openaccess, article.id, article.name) }}>Read this article!</button></td>
+
 
             </tr>
         )
