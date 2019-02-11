@@ -39,7 +39,7 @@ const Modals = React.lazy(() => import("./views/Notifications/Modals"));
 const Colors = React.lazy(() => import("./views/Theme/Colors"));
 const Typography = React.lazy(() => import("./views/Theme/Typography"));
 const Widgets = React.lazy(() => import("./views/Widgets/Widgets"));
-const OnlineShop = React.lazy(() => import("./views/OnlineShop/OnlineShop"));
+const SearchComponent = React.lazy(() => import("./views/SearchComponent/SearchComponent"));
 const ProfilePage = React.lazy(() => import("./views/ProfilePage/ProfilePage"));
 const Register = React.lazy(() => import("./views/Pages/Register/Register"));
 const Login = React.lazy(() => import("./views/Pages/Login/Login"));
@@ -119,10 +119,10 @@ const routes = [
 
 
   {
-    path: "/onlineshop",
+    path: "/search",
     exact: true,
-    name: "Onlineshop",
-    component: OnlineShop
+    name: "SearchComponent",
+    component: SearchComponent
   },
   {
     path: "/profilepage",

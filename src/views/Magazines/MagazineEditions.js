@@ -229,7 +229,8 @@ class MagazineEditions extends Component {
             padding: "10px",
             overflow: "auto",
             font: "bold 20px/1.5 Helvetica, Verdana, sans-serif",
-            color: "yellow"
+            color: "yellow",
+
 
         }
 
@@ -242,7 +243,11 @@ class MagazineEditions extends Component {
             <ul style={ulstyle}>
                 {this.state.editions.map(edition => (
 
-                    <li style={listyle} key={edition.name} onClick={() => { this.goToArticles(edition.number) }}> {edition.name} {"  "}<button onClick={() => { this.checkMembership(edition.magazine.id, edition.magazine.openaccess, edition.id, edition.name, edition.pdf) }}>Read this number!</button></li>
+                    <li style={listyle} key={edition.name}>
+                        <p onClick={() => { this.goToArticles(edition.number) }}> {edition.name} {"  "} </p>   <button onClick={() => { this.checkMembership(edition.magazine.id, edition.magazine.openaccess, edition.id, edition.name, edition.pdf) }}>Read this number!</button>
+
+
+                    </li>
                 ))}
             </ul>
         );
