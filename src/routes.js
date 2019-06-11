@@ -48,6 +48,7 @@ const Payment = React.lazy(() => import("./views/Payment/Payment"));
 const Magazines = React.lazy(() => import("./views/Magazines/Magazines"));
 const MagazineEditions = React.lazy(() => import("./views/Magazines/MagazineEditions"));
 const MagazineArticles = React.lazy(() => import("./views/Magazines/MagazineArticles"));
+const CreateArticle = React.lazy(() => import("./views/Magazines/CreateArticle"));
 
 //const User = React.lazy(() => import("./views/Users/User"));
 
@@ -116,6 +117,7 @@ const routes = [
   { path: "/magazines", exact: true, name: "Magazines", component: Magazines },
   { path: "/magazines/journals/:id", name: "MagazineEditions", component: MagazineEditions },
   { path: "/magazines/articles/:id/:edition", name: "MagazineArticles", component: MagazineArticles },
+  { path: "/magazines/createArticle/:id", name: "CreateArticle", component: CreateArticle },
 
 
   {

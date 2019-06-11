@@ -69,7 +69,7 @@ class Login extends Component {
 
         if (dat.jwt !== "null") {
           localStorage.setItem("jwt", dat.jwt);
-          this.props.history.push("/");
+          this.props.history.push("/magazines");
 
         } else {
 

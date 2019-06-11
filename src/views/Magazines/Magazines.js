@@ -41,7 +41,11 @@ class Magazines extends Component {
     this.props.history.push("/magazines/journals/id=" + data);
   }
 
+  newSWork(data) {
 
+
+    this.props.history.push("/magazines/createArticle/id=" + data);
+  }
 
   getMagazines() {
 
@@ -143,7 +147,8 @@ class Magazines extends Component {
       ).then(res => {
 
         if (res.data.status === "active") {
-          alert("Successfully published!");
+          //alert("Successfully published!");
+          this.props.history.push("/magazines/createArticle/id=" + id);
         } else {
           alert("This is open-access magazine. In order to publish, you must have valid membership!");
         }
@@ -151,7 +156,8 @@ class Magazines extends Component {
       });
 
     } else {
-      alert("Successfully published!");
+      //alert("Successfully published!");
+      this.props.history.push("/magazines/createArticle/id=" + id);
 
     }
 
@@ -233,6 +239,12 @@ class Magazines extends Component {
         {
           this.state.role === "AUTHOR" && magazine.openaccess === true &&
           <td> <button onClick={() => { this.checkMembership(magazine.id) }}>Buy Membership!</button> </td>
+
+        }
+
+        {
+
+          <td> <button onClick={() => { this.newSWork(magazine.id) }}>New scientific work!</button> </td>
 
         }
 

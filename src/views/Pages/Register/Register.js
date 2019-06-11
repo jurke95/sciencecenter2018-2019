@@ -60,7 +60,7 @@ class Register extends Component {
   }
 
   getAreasOptions() {
-    axios.get("http://localhost:8084/sarea/getSAreasNames").then(res => {
+    axios.get("http://localhost:8083/sarea/getSAreasNames").then(res => {
 
 
       this.setState({ multiSelect: res.data });

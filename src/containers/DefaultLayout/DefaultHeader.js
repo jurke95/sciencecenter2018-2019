@@ -63,25 +63,28 @@ class DefaultHeader extends Component {
     localStorage.removeItem("jwt");
 
     fetch('http://localhost:8083/user/logout', {
-      method: 'POST'
+      method: 'GET'
 
 
     })
-      .then(res => {
+      .then(res => res.json()).then(dat => {
 
 
-        switch (res.status) {
 
-          case 200: window.location = '/dashboard'; break;
-          case 401: console.error("Unauthorized"); break;
-          default: console.error("Unauthorized"); break;
+
+
+        if (dat.logout === "ok") {
+          window.location.href = "http://localhost:3006/#login";
         }
 
 
-      }
 
 
-      )
+
+
+      });
+
+
 
 
   }
