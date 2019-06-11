@@ -45,10 +45,6 @@ class CreateArticle extends Component {
 
         this.getAreasOptions();
 
-        const y = window.location.href.split('=')[1];
-
-        this.setState({ magid: y });
-        this.getMagazine(y);
 
 
 
@@ -177,11 +173,11 @@ class CreateArticle extends Component {
             abstractt: this.state.abstract,
             magid: this.state.magid,
             area: this.state.opt,
-            pdf: this.state.pdfName
+            pdf: this.state.pdfName,
+            taskid: localStorage.getItem("trenutniTaskId")
         };
 
         var datas = JSON.stringify(data);
-        var fil = this.state.file
         let formData = new FormData();
         formData.append('file', this.state.pdf);
 
@@ -233,7 +229,7 @@ class CreateArticle extends Component {
                             <Card className="mx-4">
                                 <CardBody className="p-4">
                                     <Form id="submit_reg" onSubmit={this.handleSubmit}>
-                                        <h1>Create new article in magazine "{this.state.mname}"</h1>
+                                        <h1>Create new article in magazine</h1>
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>

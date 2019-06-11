@@ -42,9 +42,27 @@ class Magazines extends Component {
   }
 
   newSWork(data) {
+    var atoken = localStorage.getItem("jwt");
 
+    axios.get("http://localhost:8083/magazine/startProcess/" + data, {
 
-    this.props.history.push("/magazines/createArticle/id=" + data);
+      headers: {
+        "Authorization-Token": atoken
+      }
+
+    }
+
+    ).then(res => {
+
+      console.log(res.data.status);
+
+      if (res.data.status === "Successfully") {
+        localStorage.setItem('taskid', res.data.taksid);
+        this.props.history.push("/tasks");
+      }
+
+    });
+
   }
 
   getMagazines() {
